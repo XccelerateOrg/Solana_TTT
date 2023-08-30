@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from '../../page.module.css';
+import styles from '../../app/page.module.css';
 import { sendForfeitRequest, sendMatchRequest } from '@/server-requests/rest';
 
 export default function SendMatchToAddress() {

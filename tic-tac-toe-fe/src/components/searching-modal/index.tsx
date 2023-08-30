@@ -1,6 +1,6 @@
 import PlayerInfo from "../game/player-info";
 import WagerInfo from "./wager-info";
-import styles from '../../game.module.css';
+import styles from '../../app/game.module.css';
 
 export default function SearchingModal({acceptGame, rejectGame}: any){
     return (

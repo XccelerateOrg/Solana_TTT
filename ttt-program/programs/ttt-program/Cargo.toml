@@ -1,12 +1,12 @@
 [package]
-name = "tic-tac-toe-program"
+name = "ttt-program"
 version = "0.1.0"
 description = "Created with Anchor"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "tic_tac_toe_program"
+name = "ttt_program"
 
 [features]
 no-entrypoint = []

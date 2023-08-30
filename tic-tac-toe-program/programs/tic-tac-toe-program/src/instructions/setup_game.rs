@@ -2,6 +2,7 @@ use crate::state::game::*;
 use anchor_lang::prelude::*;
 
 pub fn setup_game(ctx: Context<SetupGame>, player_two: Pubkey) -> Result<()> {
+    // add account to being part of the game and create a new account for the game.
     ctx.accounts
         .game
         .start([ctx.accounts.player_one.key(), player_two])

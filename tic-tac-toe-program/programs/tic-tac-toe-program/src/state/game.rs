@@ -15,25 +15,39 @@ impl Game {
     pub const MAXIMUM_SIZE: usize = (32 * 2) + 1 + (9 * (1 + 1)) + (32 + 1);
 
     pub fn start(&mut self, players: [Pubkey; 2]) -> Result<()> {
+        // check if the game has already started
         require_eq!(self.turn, 0, TicTacToeError::GameAlreadyStarted);
+        // if not -> store players info in the game account storage
         self.players = players;
+        // increment turn by 1, indicating that the game has begun
         self.turn = 1;
         Ok(())
     }
 
     pub fn is_active(&self) -> bool {
+        // check if the game is still active
         self.state == GameState::Active
     }
 
     fn current_player_index(&self) -> usize {
+        // which players turn is it?
         ((self.turn - 1) % 2) as usize
     }
 
     pub fn current_player(&self) -> Pubkey {
+        // return the public key of the player who's turn it is.
         self.players[self.current_player_index()]
     }
 
     pub fn play(&mut self, tile: &Tile) -> Result<()> {
+        // play the move
+        // check if the game is still active
+        // check if the move is valid
+        //      - is the position on the board?
+        //      - is the position already filled?
+        // check if the move is a winning move
+        // if yes -> end game but turning active to false.
+        // if no -> increment turn by 1 
         require!(self.is_active(), TicTacToeError::GameAlreadyOver);
 
         match tile {

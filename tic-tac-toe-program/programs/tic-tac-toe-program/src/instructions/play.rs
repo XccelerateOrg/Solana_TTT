@@ -5,6 +5,7 @@ use anchor_lang::prelude::*;
 pub fn play(ctx: Context<Play>, tile: Tile) -> Result<()> {
     let game = &mut ctx.accounts.game;
 
+    // .key() method returns a PubKey
     require_keys_eq!(
         game.current_player(),
         ctx.accounts.player.key(),
