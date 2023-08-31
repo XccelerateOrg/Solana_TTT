@@ -2,6 +2,10 @@ import { LocalWalletProvider } from '@/providers/wallet-provider'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { GameContext } from '@/providers/game-provider'
+import { Keypair } from '@solana/web3.js'
+import { useState } from 'react'
+import { Wallet } from '@project-serum/anchor'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <LocalWalletProvider>
-          {children}
+            {children}
         </LocalWalletProvider>
       </body>
     </html>

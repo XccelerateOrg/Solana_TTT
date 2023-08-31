@@ -7,7 +7,7 @@ pub mod instructions;
 pub mod state;
 
 // this key needs to be changed to whatever public key is returned by "anchor keys list"
-declare_id!("CZtPmzEjnWzSa4MWzxBLrsc6mw1AgqhTHBgAsdzJ1Jv5");
+declare_id!("DWFkjLba8qu1fmAxHC88jktCDS2LA5JzVTbR447Pccyt");
 
 #[program]
 pub mod tic_tac_toe_program {
