@@ -5,31 +5,12 @@
   height: 100vh;
 }
 
-.description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-
-.description a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.description p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+.innerContainer {
+    padding: 0px 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .code {
@@ -226,14 +207,6 @@
   }
 }
 
-.findMatchContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  gap: 20px;
-}
 
 .findMatchTileContainer {
   display: flex;
@@ -242,38 +215,6 @@
   align-items: center;
   gap: 24;
   width: 100%;
-}
-
-.findMatchTile:nth-child(1) {
-  box-sizing: content-box;
-  padding: 40px;
-  background-color: #50FF4D;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.findMatchTile:nth-child(2) {
-  box-sizing: content-box;
-  padding: 40px;
-  background-color: #7D2FCB;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.findMatchTile:nth-child(3) {
-  box-sizing: content-box;
-  padding: 40px;
-  background-color: #FF3737;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.findMatchTile:hover {
-  border: 2px solid #000;
-}
-
-.findMatchTile.active {
-  border: 2px solid #000;
 }
 
 .button {
@@ -285,24 +226,15 @@
   color: #fff;
 }
 
-.sendMatchContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  gap: 20px;
-}
-
 .input {
-  background-color: #f1f1f1;
   flex: 1;
   padding: 12px 24px;
   border-radius: 8px;
   font-weight: 700;
   font-size: 16px;
+  background-color: transparent;
   color: #000;
-  border: 2px solid #000000;
+  border: 2px solid #000;
   outline: none;
 }
 

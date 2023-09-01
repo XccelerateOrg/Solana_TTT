@@ -10,6 +10,8 @@ import { Keypair, clusterApiUrl } from '@solana/web3.js';
 import { GameContext } from "./game-provider";
 import { Program, Wallet } from "@project-serum/anchor";
 import { TicTacToeProgram } from "../../../tic-tac-toe-program/target/types/tic_tac_toe_program";
+import { WagerOption } from "@/types/game-types";
+import Navbar from "@/components/navbar";
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 
@@ -23,7 +25,7 @@ export const LocalWalletProvider: FC<{children: ReactNode}> = ({children}) => {
     const [player1, setPlayer1] = useState<Wallet | null>(null);
     const [player2, setPlayer2] = useState<Keypair | null>(null);
     const [program, setProgram] = useState<Program<TicTacToeProgram> | null>(null);
-  
+    const [wager, setWager] = useState<WagerOption | null>(null);
 
     useEffect(() => {
         setIsReady(true);
@@ -41,13 +43,16 @@ export const LocalWalletProvider: FC<{children: ReactNode}> = ({children}) => {
                         gameKeypair: gameKeypair,
                         player1: player1,
                         player2: player2,
+                        wager: wager,
                         program: program,
                         has_started: false,
                         setGameKeypair: setGameKeypair,
                         setPlayer1: setPlayer1,
                         setPlayer2: setPlayer2,
                         setProgram: setProgram,
+                        setWager: setWager,
                     }}>
+                        <Navbar/>
                         {children}
                     </GameContext.Provider>
                 </WalletModalProvider>

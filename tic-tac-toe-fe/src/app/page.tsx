@@ -1,25 +1,19 @@
 "use client";
-import Image from 'next/image';
 import styles from './page.module.css'
 import Navbar from '../components/navbar'
-import ConnectWallet from '../components/home/connect-wallet';
-import SendMatchToAddress from '../components/home/send-match-to-address';
 import FindMatch from '../components/home/find-match';
 import { useContext, useEffect, useState } from 'react';
-import SearchingModal from '../components/searching-modal';
 import { useRouter } from 'next/navigation';
 import { useAnchorWallet, useWallet } from '@solana/wallet-adapter-react';
 import { AnchorProvider, Program, Wallet } from '@project-serum/anchor';
-import { solana_TTTProgramInterface, solana_TTTProgramId, commitmentLevel, connection } from '@/constants/constants';
-import {TicTacToeProgram} from '../../../tic-tac-toe-program/target/types/tic_tac_toe_program';
-import { initializeProgram, setupGame } from '@/program-functions';
+import { initializeProgram, isPublicKey, setupGame } from '@/program-functions';
 import { Keypair, Signer } from '@solana/web3.js';
 import { GameContext } from '@/providers/game-provider';
-import { set } from '@project-serum/anchor/dist/cjs/utils/features';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export default function Home() {
 
-  const [isSearching, setIsSearching] = useState(true);
+  const [opponentAddress, setOpponentAddress] = useState('');
   const router = useRouter();
   const anchorWallet = useAnchorWallet();
   const {setGameKeypair, setPlayer2, setProgram} = useContext(GameContext);
@@ -39,15 +33,13 @@ export default function Home() {
     if(anchorWallet) {
         try {
           let player2 = Keypair.generate();
-          // Setup a new game
+          /**
+           * Feature 1: Provide correct value of Wager to the Solana program
+           */
           const gameKeypair = await setupGame(program, player2.publicKey, {wager100: {}});
-         
-          // Store keys for game and player 2
           setProgram(program);
           setGameKeypair(gameKeypair);
           setPlayer2(player2);
-
-          // if the transaction fails then return null
           if(gameKeypair) {
             return true;
           }
@@ -58,23 +50,38 @@ export default function Home() {
     } else {
         alert('Wallet not connected');
     }
-}
+  }
+  async function startMatch() {
+    if(isPublicKey(opponentAddress)) {
+        playGame();
+    } else {
+        alert('Opponent address is not a public key');
+    }   
+  } 
+
 
   return (
     <main className = {styles.main}>
-      {/* {isSearching && <SearchingModal/>} */}
-      <Navbar />
-      <div style={{
-        padding: '0px 20px',
-        width:'100%', 
-        display:'flex', 
-        flexDirection:'column', 
-        alignItems:'center'
-      }}>
-        <ConnectWallet />
-        <SendMatchToAddress playGame={playGame} />
-        <h1 style={{margin: '20px 0'}}>OR</h1>
-        <FindMatch />
+      <div className={styles.innerContainer}>
+        <h1 style={{margin: '20px 0'}}>Welcome to Solana Tic Tac Toe</h1>
+        <div style={{
+          display:'flex',
+          flexDirection: 'row',
+          width:'100%',
+          gap: 20,
+          padding: '20px 0'
+        }}>
+          <input className={styles.input} 
+              name="opponent-address" 
+              value={undefined} 
+              placeholder="Input Opponent Address"
+              onChange={(e) => {
+                  setOpponentAddress(e.target.value);
+              }}
+          />
+          <button className={styles.button} onClick={startMatch}>Start Match</button>
+        </div>
+        <FindMatch startMatch={startMatch} />
       </div>
     </main>
   )

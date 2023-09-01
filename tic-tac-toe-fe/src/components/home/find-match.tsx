@@ -1,37 +1,26 @@
 import { useState } from "react"
-import styles from '../../app/page.module.css'
+import styles from './home.module.css'
+import { WagerOption } from "@/types/game-types";
+import { WagerOptionTile } from "./wager-option-tile";
 
-export default function FindMatch() {
+const wagerOptions = [WagerOption.Wager20, WagerOption.Wager50, WagerOption.Wager100];
+type FindMatchProps = {
+    startMatch: () => void;
+}
 
-    const [selectedWager, setSelectedWager] = useState<null | number>(null);
-
-    function findMatch() {
-        // Find a new match based on which tab is selected
-        alert('Wager' + selectedWager);
-    }
-
+export default function FindMatch({startMatch}: FindMatchProps) {
+    const [selectedWager, selectWagerOption] = useState<WagerOption>(wagerOptions[0]);
     return (
         <div className={styles.findMatchContainer}>
-            {/* Tab1 */}{/* Tab2 */}{/* Tab3 */}
-            <div className={styles.findMatchTileContainer}>
-                <div onClick={()=>{
-                    setSelectedWager(1);
-                }} className={`${styles.findMatchTile} ${selectedWager == 1 && styles.active}`}>
-                    <p>Wager 20SOL</p>
-                </div>
-                <div onClick={()=>{
-                    setSelectedWager(2);
-                }} className={`${styles.findMatchTile} ${selectedWager == 2 && styles.active}`}>
-                    <p>Wager 50SOL</p>
-                </div>
-                <div onClick={()=>{
-                    setSelectedWager(3);
-                }} className={`${styles.findMatchTile} ${selectedWager == 3 && styles.active}`}>
-                    <p>Wager 100SOL</p>
-                </div>
-            </div>
-            {/* Button - Find Match */}
-            <button className={styles.button} onClick={findMatch}>Find Match</button>
+            {wagerOptions.map((option: WagerOption, index: number) => 
+                <WagerOptionTile 
+                    key={index} 
+                    wagerOption={option} 
+                    selectedWager={selectedWager}
+                    selectWagerOption={selectWagerOption} 
+                    backgroundColor="red"
+                />
+            )}
         </div>
     )
 }

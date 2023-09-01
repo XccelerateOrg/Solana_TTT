@@ -6,6 +6,7 @@ import { GameContext } from '@/providers/game-provider'
 import { Keypair } from '@solana/web3.js'
 import { useState } from 'react'
 import { Wallet } from '@project-serum/anchor'
+import Navbar from '@/components/navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <LocalWalletProvider>
-            {children}
+          {children}
         </LocalWalletProvider>
       </body>
     </html>

@@ -1,0 +1,33 @@
+.findMatchContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+}
+
+.findMatchTile {
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    background-color: #777;
+    border-radius: 12px;
+    color: #AAA;
+    cursor: pointer;
+    height: 20vh;
+}
+
+.findMatchTile:hover {
+transition: all 0.2s ease-in-out;
+color: #FFF;
+background-color: #000;
+}
+
+.findMatchTile.active {
+transition: all 0.2s ease-in-out;
+color: #FFF;
+background-color: #000;
+}
