@@ -1,4 +1,4 @@
-import idl from '../../../tic-tac-toe-program/target/idl/tic_tac_toe_program.json';
+import idl from '@/program/idl/tic_tac_toe_program.json';
 import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 
 export const commitmentLevel = "processed";

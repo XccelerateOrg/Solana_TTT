@@ -1,8 +1,8 @@
 "use client";
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import Gameboard from '../../components/game/gameboard';
 import PlayerInfo from "../../components/game/player-info"
-import styles from '../game.module.css';
+import styles from './game.module.css';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { useRouter } from 'next/navigation';
 import { GameContext } from '@/providers/game-provider';

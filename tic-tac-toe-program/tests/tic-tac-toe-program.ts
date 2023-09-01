@@ -9,12 +9,6 @@ describe("tic-tac-toe-program", () => {
 
   const program = anchor.workspace.TicTacToeProgram as Program<TicTacToeProgram>;
 
-  // it("Is initialized!", async () => {
-  //   // Add your test here.
-  //   const tx = await program.methods.initialize().rpc();
-  //   console.log("Your transaction signature", tx);
-  // });
-
   it('setup game!', async () => {
     const gameKeypair = anchor.web3.Keypair.generate()
     const playerOne = (program.provider as anchor.AnchorProvider).wallet

@@ -9,7 +9,7 @@ import {
 import { Keypair, clusterApiUrl } from '@solana/web3.js';
 import { GameContext } from "./game-provider";
 import { Program, Wallet } from "@project-serum/anchor";
-import { TicTacToeProgram } from "../../../tic-tac-toe-program/target/types/tic_tac_toe_program";
+import { TicTacToeProgram } from "@/program/types/tic_tac_toe_program";
 import { WagerOption } from "@/types/game-types";
 import Navbar from "@/components/navbar";
 

@@ -1,9 +1,8 @@
-import { Keypair, PublicKey, Signer } from "@solana/web3.js";
-import { TicTacToeProgram } from "../../../tic-tac-toe-program/target/types/tic_tac_toe_program";
+import { Keypair, PublicKey } from "@solana/web3.js";
+import { TicTacToeProgram } from "@/program/types/tic_tac_toe_program";
 import { AnchorProvider, Program, Wallet } from "@project-serum/anchor";
 import { commitmentLevel, connection, solana_TTTProgramId, solana_TTTProgramInterface } from "@/constants/constants";
 import * as anchor from "@project-serum/anchor";
-import { AnchorWallet } from "@solana/wallet-adapter-react";
 
 async function initializeProgram(anchorWallet: Wallet) {
     const provider = new AnchorProvider(connection, anchorWallet, {

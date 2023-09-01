@@ -1,4 +1,4 @@
-import styles from '../../../app/game.module.css';
+import styles from './styles.module.css';
 
 export default function PlayerInfo({playerId}: any) {
     const playerInfoValues = {

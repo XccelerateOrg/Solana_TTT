@@ -1,6 +1,6 @@
 import { useState } from "react"
 import styles from './home.module.css'
-import { WagerOption } from "@/types/game-types";
+import { WagerOption } from "@/types";
 import { WagerOptionTile } from "./wager-option-tile";
 
 const wagerOptions = [WagerOption.Wager20, WagerOption.Wager50, WagerOption.Wager100];

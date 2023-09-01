@@ -1,0 +1,51 @@
+.gameboard {
+    background-color: #000;
+}
+
+.gameboard .grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.gameboard .grid .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.gameboard .grid .row .cell {
+    background-color: transparent;
+    border: 1px solid #fff;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    caret-color: transparent;
+}
+
+.gameboard .grid .row .cell:nth-child(1) {
+    border-left: none;
+    border-top: none;
+}
+
+.gameboard .grid .row .cell:nth-child(2) {
+    border-top: none;
+}
+
+.gameboard .grid .row .cell:nth-child(3) {
+    border-right: none;
+    border-top: none;
+}
+
+.gameboard .grid .row:nth-child(3) .cell {
+    border-bottom: none;
+}

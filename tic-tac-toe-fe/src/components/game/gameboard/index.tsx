@@ -1,12 +1,12 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
-import styles from '../../../app/game.module.css';
-import { AnchorWallet, useAnchorWallet } from '@solana/wallet-adapter-react';
+import { useContext, useEffect, useState } from 'react';
+import styles from './styles.module.css';
+import { AnchorWallet } from '@solana/wallet-adapter-react';
 import { Keypair } from '@solana/web3.js';
-import { AnchorProvider, Wallet } from '@project-serum/anchor';
+import { Wallet } from '@project-serum/anchor';
 import { getGameState, playMove } from '@/program-functions';
 import { GameContext } from '@/providers/game-provider';
-import { Grid, defaultGrid } from './types';
-import { checkWin, isGameOver } from './game-methods';
+import { Grid, defaultGrid } from '@/types';
+import { checkWin, isGameOver } from './methods';
 
 type GameboardProps = {
     goBack: () => void;
@@ -45,10 +45,7 @@ export default function Gameboard({goBack, gameKeypair, player1, player2}: Gameb
                 const tx = await playMove(program, gameKeypair, playerTurn, player as Wallet, {row , column});
                 if(tx) {
                     setPlayerTurn(playerTurn === 1 ? 2 : 1);
-                    setGrid({
-                        ...grid,
-                        [cell]: playerTurn === 1 ? "X" : "O"
-                    })
+                    setGrid([...grid.slice(0, cell - 1), playerTurn === 1 ? 'X' : 'O', ...grid.slice(cell)])
                 }
             }
         }
@@ -82,21 +79,21 @@ export default function Gameboard({goBack, gameKeypair, player1, player2}: Gameb
                 <div className={styles.row}>
                     {[1,2,3].map((cell: number, index: number) => {
                         return (
-                            <input key={index} className={styles.cell} id={"cell-" + cell} value={grid[cell]} onClick={()=>{play(cell)}}/>
+                            <input key={index} className={styles.cell} id={"cell-" + cell} value={grid[cell - 1]} onClick={()=>{play(cell)}}/>
                         )
                     })}
                 </div>
                 <div className={styles.row}>
                     {[4,5,6].map((cell: number, index: number) => {
                         return (
-                            <input key={index} className={styles.cell} id={"cell-" + cell} value={grid[cell]} onClick={()=>{play(cell)}}/>
+                            <input key={index} className={styles.cell} id={"cell-" + cell} value={grid[cell - 1]} onClick={()=>{play(cell)}}/>
                         )
                     })}
                 </div>
                 <div className={styles.row}>
                     {[7,8,9].map((cell: number, index: number) => {
                         return (
-                            <input key={index} className={styles.cell} id={"cell-" + cell} value={grid[cell]} onClick={()=>{play(cell)}}/>
+                            <input key={index} className={styles.cell} id={"cell-" + cell} value={grid[cell - 1]} onClick={()=>{play(cell)}}/>
                         )
                     })}
                 </div>

@@ -1,7 +1,7 @@
 import { Program } from "@project-serum/anchor";
 import { Keypair } from "@solana/web3.js";
 import { createContext } from "react";
-import { TicTacToeProgram } from "../../../tic-tac-toe-program/target/types/tic_tac_toe_program";
+import { TicTacToeProgram } from "@/program/types/tic_tac_toe_program";
 import { WagerOption } from "@/types/game-types";
 
 export const GameContext = createContext<{
