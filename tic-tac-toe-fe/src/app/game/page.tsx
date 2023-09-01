@@ -22,7 +22,6 @@ export default function GameScreen() {
     }
     
     useEffect(() => {
-        console.log(gameKeypair, player2);
         if(!anchorWallet?.publicKey) {
             router.push('/');
         } else {
@@ -36,21 +35,15 @@ export default function GameScreen() {
 
     return (
         <main className={styles.main}>
-            {/* Navbar */}
             <Navbar/>
-            {/* Total Wager */}
             <div className={styles.wagerContainer}>
                 <p>Total Wager: 40SOL</p>
             </div>
             <div className={styles.gameContainer}>
-                {/* Player 1 Info */}
                 <PlayerInfo playerId={1} />
-                {/* Game Board */}
                 <Gameboard goBack={goBack} gameKeypair={gameKeypair} player1={anchorWallet} player2={player2}/>
-                {/* Player 2 Info */}
                 <PlayerInfo playerId={2} />
             </div>
-            {/* Forfeit Button */}
             <button className={styles.button} onClick={forfeitMatch}>Forfeit</button>
         </main>
     )

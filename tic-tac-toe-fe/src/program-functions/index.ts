@@ -39,22 +39,36 @@ async function setupGame(program: Program<TicTacToeProgram>, player_two: PublicK
     return null;
 }
 
+/**
+ * Send transaction for playing a move
+ * @param program
+ * @param gameKeypair 
+ * @param turn
+ * @param player
+ * @param tile
+ * @returns
+ */
 async function playMove(
     program: Program<TicTacToeProgram>,
     gameKeypair: Keypair, 
+    turn: number,
     player: any, 
     tile: {row: number, column: number}, 
-) {
-    console.log(player);
-    // send a transaction to make a move in the game
-    const tx = await program.rpc.play({...tile}, {
-      accounts: {
-        player: player.publicKey,
-        game: gameKeypair.publicKey,
-      },
-      signers: [player],
-    });
-    console.log(tx);
+): Promise<string | null> {
+    try {
+      const tx = await program.rpc.play({...tile}, {
+        accounts: {
+          player: player.publicKey,
+          game: gameKeypair.publicKey,
+        },
+        signers: turn == 1 ? [] : [player],
+      });
+      return tx;
+    } catch (err: any) {
+      const errorMessage = JSON.parse(JSON.stringify(err)).error.errorMessage;
+      alert(errorMessage);
+      return null;
+    }
 }
 
 function isPublicKey(key: String): boolean {

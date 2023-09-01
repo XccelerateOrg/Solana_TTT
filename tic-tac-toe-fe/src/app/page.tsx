@@ -63,7 +63,6 @@ export default function Home() {
   return (
     <main className = {styles.main}>
       {/* {isSearching && <SearchingModal/>} */}
-      {/* Create Navbar */}
       <Navbar />
       <div style={{
         padding: '0px 20px',
