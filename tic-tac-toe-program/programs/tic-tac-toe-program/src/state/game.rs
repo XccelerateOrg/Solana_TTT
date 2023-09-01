@@ -15,39 +15,25 @@ impl Game {
     pub const MAXIMUM_SIZE: usize = (32 * 2) + 1 + (9 * (1 + 1)) + (32 + 1);
 
     pub fn start(&mut self, players: [Pubkey; 2]) -> Result<()> {
-        // check if the game has already started
         require_eq!(self.turn, 0, TicTacToeError::GameAlreadyStarted);
-        // if not -> store players info in the game account storage
         self.players = players;
-        // increment turn by 1, indicating that the game has begun
         self.turn = 1;
         Ok(())
     }
 
     pub fn is_active(&self) -> bool {
-        // check if the game is still active
         self.state == GameState::Active
     }
 
     fn current_player_index(&self) -> usize {
-        // which players turn is it?
         ((self.turn - 1) % 2) as usize
     }
 
     pub fn current_player(&self) -> Pubkey {
-        // return the public key of the player who's turn it is.
         self.players[self.current_player_index()]
     }
 
     pub fn play(&mut self, tile: &Tile) -> Result<()> {
-        // play the move
-        // check if the game is still active
-        // check if the move is valid
-        //      - is the position on the board?
-        //      - is the position already filled?
-        // check if the move is a winning move
-        // if yes -> end game but turning active to false.
-        // if no -> increment turn by 1 
         require!(self.is_active(), TicTacToeError::GameAlreadyOver);
 
         match tile {
@@ -73,6 +59,10 @@ impl Game {
         Ok(())
     }
 
+    /* 
+        Feature 5: Either of the players can forfeit the match
+    */
+
     fn is_winning_trio(&self, trio: [(usize, usize); 3]) -> bool {
         let [first, second, third] = trio;
         self.board[first.0][first.1].is_some()
@@ -81,15 +71,17 @@ impl Game {
     }
 
     fn update_state(&mut self) {
+        
+        /*
+            Feature 4: Release escrow to the winner of the game or to both accounts in case the game ends in a draw. 
+        */
         for i in 0..=2 {
-            // three of the same in one row
             if self.is_winning_trio([(i, 0), (i, 1), (i, 2)]) {
                 self.state = GameState::Won {
                     winner: self.current_player(),
                 };
                 return;
             }
-            // three of the same in one column
             if self.is_winning_trio([(0, i), (1, i), (2, i)]) {
                 self.state = GameState::Won {
                     winner: self.current_player(),
@@ -98,7 +90,6 @@ impl Game {
             }
         }
 
-        // three of the same in one diagonal
         if self.is_winning_trio([(0, 0), (1, 1), (2, 2)])
             || self.is_winning_trio([(0, 2), (1, 1), (2, 0)])
         {
@@ -108,8 +99,6 @@ impl Game {
             return;
         }
 
-        // reaching this code means the game has not been won,
-        // so if there are unfilled tiles left, it's still active
         for row in 0..=2 {
             for column in 0..=2 {
                 if self.board[row][column].is_none() {
@@ -118,9 +107,6 @@ impl Game {
             }
         }
 
-        // game has not been won
-        // game has no more free tiles
-        // -> game ends in a tie
         self.state = GameState::Tie;
     }
 }
